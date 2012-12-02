@@ -20,11 +20,15 @@
 #ifndef _EXPORT_H_
 #define _EXPORT_H_
 
- 
 class IExport{
-	public:
+    public:
+        typedef enum {
+           NONE = 0,
+           USERNAME = 1 << 0,
+           PASSWORD = 1 << 1
+        } CryptedFields;
 		virtual ~IExport(){};
-		virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database)=0;
+    virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database,const QByteArray &key = QByteArray(),CryptedFields fields = NONE)=0;
 		virtual QString identifier()=0;
 		virtual QString title()=0;
 };

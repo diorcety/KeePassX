@@ -20,6 +20,7 @@
  
 
 #include "Import_KeePassX_Xml.h"
+#include "dialogs/PasswordDlg.h"
 
 bool Import_KeePassX_Xml::importDatabase(QWidget* Parent, IDatabase* database){
 	db=database;
@@ -41,24 +42,53 @@ bool Import_KeePassX_Xml::importDatabase(QWidget* Parent, IDatabase* database){
 		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));		
 		return false;		
 	}
-	QDomNodeList TopLevelGroupNodes=root.childNodes();
-	QStringList GroupNames;
-	for(int i=0;i<TopLevelGroupNodes.count();i++){
-		if(TopLevelGroupNodes.at(i).toElement().tagName()!="group"){
-			qWarning("Import_KeePassX_Xml: Error: Unknow tag '%s'",CSTR(TopLevelGroupNodes.at(i).toElement().tagName()));
-			QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));		
-			return false;
-		}
-		if(!parseGroup(TopLevelGroupNodes.at(i).toElement(),NULL)){
-			QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));
-			return false;}		
-	}
-	
-	return true;
-	
+
+    QByteArray key;
+    if(root.attributeNode("crypted").value().toUInt()) {
+        PasswordDialog pwdDlg(Parent, PasswordDialog::Mode_Ask, PasswordDialog::Flag_None);
+        if(pwdDlg.exec()==PasswordDialog::Exit_Ok) {
+            if(!pwdDlg.composite()) {
+                key = pwdDlg.data();
+            } else {
+                if(!pwdDlg.password().isEmpty()) {
+                    key.append(pwdDlg.password().toUtf8());
+                }
+                if(!pwdDlg.keyFile().isEmpty()) {
+                    QFile file(pwdDlg.keyFile());
+
+                    if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+                        showErrMsg(decodeFileError(file.error()));
+                        return false;
+                    }
+                    key.append(file.readAll());
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    try {
+        QDomNodeList TopLevelGroupNodes=root.childNodes();
+        QStringList GroupNames;
+        for(int i=0;i<TopLevelGroupNodes.count();i++){
+            if(TopLevelGroupNodes.at(i).toElement().tagName()!="group"){
+                qWarning("Import_KeePassX_Xml: Error: Unknow tag '%s'",CSTR(TopLevelGroupNodes.at(i).toElement().tagName()));
+                QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));
+                return false;
+            }
+            if(!parseGroup(TopLevelGroupNodes.at(i).toElement(),NULL,key)){
+                QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));
+                return false;}
+        }
+        return true;
+    } catch(DecryptException &) {
+        showErrMsg("Invalid password.");
+        return false;
+    }
 }
 
-bool Import_KeePassX_Xml::parseGroup(const QDomElement& GroupElement,IGroupHandle* ParentGroup){
+bool Import_KeePassX_Xml::parseGroup(const QDomElement& GroupElement,IGroupHandle* ParentGroup,const QByteArray &key){
 	CGroup Group;
 	QDomNodeList ChildNodes=GroupElement.childNodes();
 	for(int i=0;i<ChildNodes.size();i++){
@@ -76,9 +106,9 @@ bool Import_KeePassX_Xml::parseGroup(const QDomElement& GroupElement,IGroupHandl
 	
 	for(int i=0;i<ChildNodes.size();i++){
 		if(ChildNodes.item(i).toElement().tagName()=="entry"){
-			if(!parseEntry(ChildNodes.item(i).toElement(), GroupHandle))return false;
+            if(!parseEntry(ChildNodes.item(i).toElement(),GroupHandle,key))return false;
 		}else if(ChildNodes.item(i).toElement().tagName()=="group"){
-			if(!parseGroup(ChildNodes.item(i).toElement(),GroupHandle))return false;
+            if(!parseGroup(ChildNodes.item(i).toElement(),GroupHandle,key))return false;
 		}		
 	}
 	
@@ -87,7 +117,7 @@ bool Import_KeePassX_Xml::parseGroup(const QDomElement& GroupElement,IGroupHandl
 }
 
 
-bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandle* Group){
+bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandle* Group,const QByteArray &key){
 	if(EntryElement.isNull()){
 		qWarning("Import_KeePassX_Xml: Error: Entry element is null.");
 		return false;
@@ -101,12 +131,11 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
 		}
 		if(ChildNodes.item(i).toElement().tagName()=="title")
 			entry->setTitle(ChildNodes.item(i).toElement().text());
-		else if(ChildNodes.item(i).toElement().tagName()=="username")
-			entry->setUsername(ChildNodes.item(i).toElement().text());
-		else if(ChildNodes.item(i).toElement().tagName()=="password"){
+        else if(ChildNodes.item(i).toElement().tagName()=="username") {
+            entry->setUsername(decryptElement(ChildNodes.item(i).toElement(), key));
+        } else if(ChildNodes.item(i).toElement().tagName()=="password"){
 			SecString pw;
-			QString cpw=ChildNodes.item(i).toElement().text();
-			pw.setString(cpw,true);
+            pw.setString(decryptElement(ChildNodes.item(i).toElement(), key),true);
 			entry->setPassword(pw);			
 		}
 		else if(ChildNodes.item(i).toElement().tagName()=="url")
@@ -142,4 +171,16 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
 		}
 	}
 	return true;	
+}
+
+QString Import_KeePassX_Xml::decryptElement(const QDomElement &element,const QByteArray &key) {
+    if(element.hasAttribute("crypted") && element.attribute("crypted").toUInt()) {
+        QByteArray data = QByteArray::fromHex(element.text().toAscii());
+        QByteArray out;
+        if(!decrypt_data(data, out, key)) {
+            throw DecryptException();
+        }
+        return QString::fromUtf8(out);
+    }
+    return element.text();
 }

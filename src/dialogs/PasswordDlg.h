@@ -52,6 +52,8 @@ class PasswordDialog : public QDialog, private Ui_PasswordDlg {
 		QString selectedBookmark();
 		QString keyFile();
 		QString password();
+        const QByteArray &data();
+        QBool composite();
 	
 	private slots:
 		void OnOK();
@@ -72,6 +74,8 @@ class PasswordDialog : public QDialog, private Ui_PasswordDlg {
 		QString Filename;
 		QString Password;
 		QString KeyFile;
+        QByteArray Data;
+
 		void setStatePasswordOnly();
 		void setStateKeyFileOnly();
 		void setStateBoth();

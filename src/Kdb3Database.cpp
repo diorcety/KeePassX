@@ -880,6 +880,7 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 		}
 	}
 }
+
 */
 
 bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
@@ -894,9 +895,17 @@ bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
 	return true;
 }
 
+
+bool Kdb3Database::setKey(const QByteArray& data){
+    RawMasterKey.unlock();
+    SHA256::hashBuffer(data.data(), *RawMasterKey, data.length());
+    RawMasterKey.lock();
+    return true;
+}
+
 bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
-	if(!password.isEmpty() && !keyfile.isEmpty())
-		return setCompositeKey(password,keyfile);
+    if(!password.isEmpty() && !keyfile.isEmpty())
+        return setCompositeKey(password,keyfile);
 	if(!password.isEmpty())
 		return setPasswordKey(password);
 	if(!keyfile.isEmpty())

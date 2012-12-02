@@ -100,7 +100,6 @@ public:
 	bool IsExpanded;
 };
 
-
 class IGroupHandle;
 class IEntryHandle;
 //! Handle class interface for accessing entries
@@ -237,8 +236,9 @@ class IDatabase{
 public:
 	virtual ~IDatabase(){};
 	
-	virtual bool setKey(const QString& password,const QString& keyfile)=0;
-	virtual bool isKeyError()=0;
+    virtual bool setKey(const QString& password,const QString& keyfile)=0;
+    virtual bool setKey(const QByteArray& data)=0;
+    virtual bool isKeyError()=0;
 	virtual void generateMasterKey()=0;
 
 	//! Loads a database.

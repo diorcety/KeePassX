@@ -20,17 +20,19 @@
 
 #include "Export_KeePassX_Xml.h"
 
-bool Export_KeePassX_Xml::exportDatabase(QWidget* GuiParent,IDatabase* database){
+bool Export_KeePassX_Xml::exportDatabase(QWidget* GuiParent,IDatabase* database,const QByteArray &key,CryptedFields fields){
 	db=database;	
 	QFile *file=openFile(GuiParent,identifier(),QStringList()<<tr("XML Files (*.xml)") << tr("All Files (*)"));
 	if(!file)return false;
 	QDomDocument doc("KEEPASSX_DATABASE");
 	QDomElement root=doc.createElement("database");
+    if(fields != NONE)
+        root.setAttribute("crypted", true);
 	doc.appendChild(root);
 	QList<IGroupHandle*> Groups=db->sortedGroups();
 	for(int i=0;i<Groups.size();i++){
 		if(Groups[i]->parent()==NULL){
-			addGroup(Groups[i],root,doc);
+            addGroup(Groups[i],root,doc,key,fields);
 		}
 	}
 	file->write(doc.toByteArray());
@@ -39,7 +41,7 @@ bool Export_KeePassX_Xml::exportDatabase(QWidget* GuiParent,IDatabase* database)
 	return true;
 }
 
-void Export_KeePassX_Xml::addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc){
+void Export_KeePassX_Xml::addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields){
 	QDomElement GroupElement=doc.createElement("group");
 	parent.appendChild(GroupElement);
 	QDomElement Title=doc.createElement("title");
@@ -50,16 +52,16 @@ void Export_KeePassX_Xml::addGroup(IGroupHandle* group,QDomElement& parent,QDomD
 	GroupElement.appendChild(Icon);
 	QList<IGroupHandle*> children=group->children();
 	for(int i=0;i<children.size();i++){
-		addGroup(children[i],GroupElement,doc);
+        addGroup(children[i],GroupElement,doc,key,fields);
 	}
 	QList<IEntryHandle*> entries=db->entriesSortedStd(group);
 	for(int i=0;i<entries.size();i++){
-		addEntry(entries[i],GroupElement,doc);
+        addEntry(entries[i],GroupElement,doc,key,fields);
 	}
 	
 }
 
-void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomDocument& doc){
+void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields){
 	QDomElement GroupElement=doc.createElement("entry");
 	parent.appendChild(GroupElement);
 	QDomElement Title=doc.createElement("title");
@@ -76,10 +78,24 @@ void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomD
 	QDomElement Expire=doc.createElement("expire");	
 	
 	Title.appendChild(doc.createTextNode(entry->title()));
-	Username.appendChild(doc.createTextNode(entry->username()));
+    if(fields & IExport::USERNAME) {
+        QByteArray out;
+        encrypt_data(entry->username().toUtf8(), out, key);
+        Username.appendChild(doc.createTextNode(out.toHex()));
+        Username.setAttribute("crypted", true);
+    } else {
+        Username.appendChild(doc.createTextNode(entry->username()));
+    }
 	SecString password=entry->password();
 	password.unlock();
-	Password.appendChild(doc.createTextNode(password.string()));
+    if(fields & IExport::PASSWORD) {
+        QByteArray out;
+        encrypt_data(password.string().toUtf8(), out, key);
+        Password.appendChild(doc.createTextNode(out.toHex()));
+        Password.setAttribute("crypted", true);
+    } else {
+        Password.appendChild(doc.createTextNode(password.string()));
+    }
 	password.lock();
 	Url.appendChild(doc.createTextNode(entry->url()));
 	QStringList CommentLines=entry->comment().split('\n');

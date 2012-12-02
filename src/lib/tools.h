@@ -21,7 +21,7 @@
 
 class IEntryHandle;
 
-enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
+enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2,CRYPTEDKEYFILE=3};
 struct Translation {
 	QString nameCode;
 	QString nameLong;
@@ -43,6 +43,9 @@ void showErrMsg(const QString& msg,QWidget* parent=NULL);
 QString decodeFileError(QFile::FileError Code);
 QString makePathRelative(const QString& Abs,const QString& Cur);
 QString getImageFile(const QString& name);
+void encrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password);
+bool decrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password);
+bool createCryptedKeyFile(const QString& outfilename,QString* err, const QString& infilename, const QString& password);
 bool createKeyFile(const QString& filename,QString* err, int length=32, bool Hex=true);
 bool lockPage(void* addr, int len);
 bool unlockPage(void* addr, int len);

@@ -32,10 +32,14 @@ class Import_KeePassX_Xml:public ImporterBase, public IImport{
 		virtual QString identifier(){return "KeePassX_Xml";}
 		virtual QString title(){return "KeePassX XML (*.xml)";}
 	private:
-		bool parseGroup(const QDomElement& GroupElement,IGroupHandle* ParentGroup);
-		bool parseEntry(const QDomElement& EntryElement,IGroupHandle* Group);
-		IDatabase* db;
-		QWidget* GuiParent;	
+        bool parseGroup(const QDomElement& GroupElement,IGroupHandle* ParentGroup,const QByteArray &key);
+        bool parseEntry(const QDomElement& EntryElement,IGroupHandle* Group,const QByteArray &key);
+        IDatabase* db;
+        QWidget* GuiParent;
+        static QString decryptElement(const QDomElement &element,const QByteArray &key);
+        class DecryptException: public std::exception {
+
+        };
 };
 
 

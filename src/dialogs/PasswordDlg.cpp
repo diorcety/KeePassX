@@ -21,7 +21,7 @@
 #include "dialogs/PasswordDlg.h"
 
 PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename)
-: QDialog(parent)
+    : QDialog(parent)
 {
 	Q_UNUSED(flags);
 	setupUi(this);
@@ -59,6 +59,7 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	if(config->rememberLastKey() && Mode!=Mode_Change && Mode!=Mode_Set){
 		switch(config->lastKeyType()){
 		case PASSWORD:
+            Check_Composite->setChecked(true);
 			Check_Password->setChecked(true);
 			Check_KeyFile->setChecked(false);
 			Combo_KeyFile->setEditText("");
@@ -66,6 +67,7 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 			break;
 			
 		case KEYFILE:
+            Check_Composite->setChecked(true);
 			Check_Password->setChecked(false);
 			Check_KeyFile->setChecked(true);
 			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
@@ -73,12 +75,21 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 			break;
 
 		case BOTH:
+            Check_Composite->setChecked(true);
 			Check_Password->setChecked(true);
 			Check_KeyFile->setChecked(true);
 			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
 			Edit_Password->setFocus(Qt::OtherFocusReason);
 			break;
-		}
+
+        case CRYPTEDKEYFILE:
+            Check_Composite->setChecked(false);
+            Check_Password->setChecked(true);
+            Check_KeyFile->setChecked(true);
+            Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+            Edit_Password->setFocus(Qt::OtherFocusReason);
+            break;
+        }
 	}
 	else{
 		Edit_Password->setFocus(Qt::OtherFocusReason);
@@ -156,9 +167,10 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL( clicked() ), this, SLOT( OnOK() ) );
 	connect(Button_Browse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 	connect(Button_GenKeyFile,SIGNAL(clicked()),this,SLOT(OnGenKeyFile()));
-	connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
-	connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
-	connect(Button_Back,SIGNAL(clicked()),this,SLOT(OnButtonBack()));
+    connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
+    connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
+    connect(Check_Composite,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
+    connect(Button_Back,SIGNAL(clicked()),this,SLOT(OnButtonBack()));
 	if(!config->showPasswordsPasswordDlg())
 		ChangeEchoModeDatabaseKey();
 	else
@@ -271,16 +283,35 @@ void PasswordDialog::OnOK(){
 	}
 	
 	if(Check_Password->isChecked() && (Mode==Mode_Set || Mode==Mode_Change)){
-		Edit_PwRepeat->clear();
-		Label_Unequal->hide();
-		stackedWidget->setCurrentIndex(1);
-		Edit_PwRepeat->setFocus(Qt::OtherFocusReason);
-		return;
+        if(Check_Composite->isChecked()) {
+            Edit_PwRepeat->clear();
+            Label_Unequal->hide();
+            stackedWidget->setCurrentIndex(1);
+            Edit_PwRepeat->setFocus(Qt::OtherFocusReason);
+            return;
+        }
 	}
+
+    if(!Check_Composite->isChecked()) {
+        QFile file(KeyFile);
+        if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+            showErrMsg(decodeFileError(file.error()));
+            return;
+        }
+        QByteArray in = file.readAll();
+        if(!decrypt_data(in, Data, Password.toUtf8())) {
+            showErrMsg(tr("Invalid crypted file or password"));
+            return;
+        }
+    }
 	
 	if((Mode==Mode_Ask || Mode==Mode_Set) && config->rememberLastKey()){
 		if(Check_Password->isChecked() && Check_KeyFile->isChecked()){
-			config->setLastKeyType(BOTH);
+            if(Check_Composite->isChecked()) {
+                config->setLastKeyType(BOTH);
+            } else {
+                config->setLastKeyType(CRYPTEDKEYFILE);
+            }
 			config->setLastKeyLocation(Combo_KeyFile->currentText());
 		}
 		else if(Check_Password->isChecked()){
@@ -297,6 +328,10 @@ void PasswordDialog::OnOK(){
 }
 
 void PasswordDialog::OnCheckBoxesChanged(){
+    if(!Check_Composite->isChecked()) {
+        Check_Password->setCheckState(Qt::Checked);
+        Check_KeyFile->setCheckState(Qt::Checked);
+    }
 	Edit_Password->setEnabled(Check_Password->isChecked());
 	Combo_KeyFile->setEnabled(Check_KeyFile->isChecked());
 	Button_Browse->setEnabled(Check_KeyFile->isChecked());
@@ -340,18 +375,32 @@ void PasswordDialog::OnGenKeyFile(){
 	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Create Key File..."),
 	                                          QStringList() << tr("All Files (*)")
 	                                                        << tr("Key Files (*.key)"));
-	if(!filename.isEmpty()){
-		QString error;
-		if(!createKeyFile(filename,&error,32,true)){
-			showErrMsg(error,this);
-			return;
-		}
-		else {
-			if(Check_KeyFile->isChecked())
-				Combo_KeyFile->setEditText(filename);
-			return;
-		}
-	}	
+    if(Check_Composite->isChecked()) {
+        if(!filename.isEmpty()){
+            QString error;
+            if(!createKeyFile(filename,&error,32,true)){
+                showErrMsg(error,this);
+                return;
+            }
+            else {
+                if(Check_KeyFile->isChecked())
+                    Combo_KeyFile->setEditText(filename);
+                return;
+            }
+        }
+    } else {
+        if(!filename.isEmpty() && Check_KeyFile->isChecked() && !Combo_KeyFile->currentText().isEmpty() && Check_Password->isChecked() && !Edit_Password->text().isEmpty()) {
+            QString error;
+            if(!createCryptedKeyFile(filename,&error,Combo_KeyFile->currentText(),Edit_Password->text())){
+                showErrMsg(error,this);
+                return;
+            }
+            else {
+                Combo_KeyFile->setEditText(filename);
+                return;
+            }
+        }
+    }
 }
 
 QString PasswordDialog::password(){
@@ -361,12 +410,19 @@ QString PasswordDialog::password(){
 		return QString();
 }
 
+const QByteArray &PasswordDialog::data() {
+    return Data;
+}
 
 QString PasswordDialog::keyFile(){
 	if(Check_KeyFile->isChecked())
 		return Combo_KeyFile->currentText();
 	else
 		return QString();
+}
+
+QBool PasswordDialog::composite(){
+    return QBool(Check_Composite->isChecked());
 }
 
 QString PasswordDialog::selectedBookmark(){

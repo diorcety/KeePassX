@@ -60,6 +60,18 @@ const QString& SecString::string(){
 	return plain;
 }
 
+void SecString::setString(const QString& str){
+    QByteArray StrData = str.toUtf8();
+    int len = StrData.size();
+    unsigned char* buffer = new unsigned char[len];
+    RC4.encrypt((const unsigned char*)StrData.data(), buffer, len);
+    crypt = QByteArray((const char*)buffer, len);
+    overwrite(buffer, len);
+    overwrite((unsigned char*)StrData.data(), len);
+    delete [] buffer;
+    lock();
+}
+
 void SecString::setString(QString& str, bool DeleteSource){
 	QByteArray StrData = str.toUtf8();
 	int len = StrData.size();

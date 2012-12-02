@@ -39,7 +39,8 @@ public:
 		The SecString is locked after this operation.
 		\param Source The string which should be set as content of the SecString.
 		\param DelSrc Set this parameter TRUE if you want that SecString overwrites an deletes the source string.*/
-	void setString(QString& Source, bool DelSrc=false);
+    void setString(QString& Source, bool DelSrc=false);
+    void setString(const QString& Source);
 	/*! Locks the string.
 		That means that the unencrypted string will be overwritten and deleted and only the encrypted buffer remains.
 		It is forbidden to call the function string() when the SecString is locked.*/
@@ -49,8 +50,8 @@ public:
 	operator QString();
 	int length();
 	
-	static void overwrite(unsigned char* str,int len);
-	static void overwrite(QString& str);
+    static void overwrite(unsigned char* str,int len);
+    static void overwrite(QString& str);
 	static void generateSessionKey();
 	static void deleteSessionKey();
 	

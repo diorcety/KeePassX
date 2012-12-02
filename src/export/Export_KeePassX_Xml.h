@@ -27,12 +27,12 @@ class Export_KeePassX_Xml:public ExporterBase, public IExport{
 	Q_OBJECT
 	
 	public:
-		virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database);	
+        virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database, const QByteArray &key = QByteArray(), CryptedFields fields = NONE);
 		virtual QString identifier(){return "EXPORT_KEEPASSX_XML";}
 		virtual QString title(){return tr("KeePassX XML File");}
 	private:
-		void addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc);
-		void addEntry(IEntryHandle* group,QDomElement& parent,QDomDocument& doc);
+        void addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields);
+        void addEntry(IEntryHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields);
 		IDatabase* db;
 };
 

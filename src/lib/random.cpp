@@ -23,6 +23,8 @@
 
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)
 	#include <QFile>
+    #include <sys/types.h>
+    #include <unistd.h>
 #elif defined(Q_WS_WIN)
 	#include <windows.h>
 	#include <wincrypt.h>

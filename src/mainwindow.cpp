@@ -33,6 +33,7 @@
 #include "dialogs/SettingsDlg.h"
 #include "dialogs/DatabaseSettingsDlg.h"
 #include "dialogs/PasswordDlg.h"
+#include "dialogs/ExportDlg.h"
 #include "dialogs/SimplePasswordDlg.h"
 #include "dialogs/PasswordGenDlg.h"
 #include "dialogs/CollectEntropyDlg.h"
@@ -467,8 +468,11 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	EntryView->db=db;
 	setupDatabaseConnections(db);
 	QString err;
-	setStatusBarMsg(StatusBarLoading);
-	db->setKey(dlg.password(),dlg.keyFile());
+    setStatusBarMsg(StatusBarLoading);
+    if(dlg.composite())
+        db->setKey(dlg.password(),dlg.keyFile());
+    else
+        db->setKey(dlg.data());
 	
 	if (!dbReadOnly && !QFile::exists(filename+".lock")){
 		QFile lock(filename+".lock");
@@ -584,7 +588,10 @@ void KeepassMainWindow::OnFileNewKdb(){
 		if (IsLocked)
 			resetLock();
 		db=db_new;
-		db->setKey(dlg.password(),dlg.keyFile());
+        if(dlg.composite())
+            db->setKey(dlg.password(),dlg.keyFile());
+        else
+            db->setKey(dlg.data());
 		db->generateMasterKey();
 		updateCurrentFile(QString());
 		GroupView->db=db;
@@ -972,7 +979,10 @@ void KeepassMainWindow::OnFileChangeKey(){
 	QString filename = file ? file->fileName() : QString();
 	PasswordDialog dlg(this,PasswordDialog::Mode_Change,PasswordDialog::Flag_None,filename);
 	if(dlg.exec()==PasswordDialog::Exit_Ok){
-		db->setKey(dlg.password(),dlg.keyFile());
+        if(dlg.composite())
+            db->setKey(dlg.password(),dlg.keyFile());
+        else
+            db->setKey(dlg.data());
 		db->generateMasterKey();
 		setStateFileModified(true);
 	}
@@ -985,7 +995,33 @@ void KeepassMainWindow::OnFileExit(){
 
 
 void KeepassMainWindow::OnExport(QAction* action){
-	dynamic_cast<IExport*>(action->data().value<QObject*>())->exportDatabase(this,db);
+    ExportDlg exportDlg(this);
+    if(exportDlg.exec()==QDialog::Accepted) {
+        QByteArray key;
+        IExport::CryptedFields fields = exportDlg.flags();
+        if(fields != IExport::NONE) {
+            PasswordDialog pwdDlg(this, PasswordDialog::Mode_Ask, PasswordDialog::Flag_None);
+            if(pwdDlg.exec()==PasswordDialog::Exit_Ok) {
+                if(!pwdDlg.composite()) {
+                    key = pwdDlg.data();
+                } else {
+                    if(!pwdDlg.password().isEmpty()) {
+                        key.append(pwdDlg.password().toUtf8());
+                    }
+                    if(!pwdDlg.keyFile().isEmpty()) {
+                        QFile file(pwdDlg.keyFile());
+
+                        if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+                            showErrMsg(decodeFileError(file.error()));
+                            return;
+                        }
+                        key.append(file.readAll());
+                    }
+                }
+            }
+        }
+        dynamic_cast<IExport*>(action->data().value<QObject*>())->exportDatabase(this,db,key,fields);
+    }
 }
 
 void KeepassMainWindow::OnImport(QAction* action){

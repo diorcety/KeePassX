@@ -159,7 +159,8 @@ public:
 	virtual CryptAlgorithm cryptAlgorithm(){return Algorithm;}
 	virtual unsigned int keyTransfRounds(){return KeyTransfRounds;}
 	virtual void setKeyTransfRounds(unsigned int rounds){KeyTransfRounds=rounds;}
-	virtual bool setKey(const QString& password, const QString& keyfile);
+    virtual bool setKey(const QString& password, const QString& keyfile);
+    virtual bool setKey(const QByteArray& data);
 	virtual bool setPasswordKey(const QString& password);
 	virtual bool setFileKey(const QString& filename);
 	virtual bool setCompositeKey(const QString& password,const QString& filename);

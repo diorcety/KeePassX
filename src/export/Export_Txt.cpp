@@ -34,7 +34,7 @@ QString GroupTemplate=QString("\n\
 *** Group: %1 ***\n\
 ");
 
-bool Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db){
+bool Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db, const QByteArray &key, CryptedFields fields){
 	QFile *file=openFile(GuiParent,identifier(),QStringList()<<tr("All Files (*)") << tr("Text Files (*.txt)"));
 	if(!file)return false;
 	QList<IGroupHandle*> groups=db->sortedGroups();

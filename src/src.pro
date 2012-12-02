@@ -16,7 +16,7 @@ isEqual(DEBUG,1){
 	CONFIG += debug
 }
 else {
-	CONFIG += release
+    CONFIG += release
 }
 
 isEqual(NOSTRIP,1) {
@@ -158,7 +158,8 @@ FORMS += forms/AboutDlg.ui \
          forms/SettingsDlg.ui \
          forms/SimplePasswordDlg.ui \
 #         forms/TrashCanDlg.ui \
-         forms/WorkspaceLockedWidget.ui
+         forms/WorkspaceLockedWidget.ui \
+         forms/ExportDlg.ui \
 
 TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
                   translations/keepassx-es_ES.ts \
@@ -258,7 +259,8 @@ HEADERS += main.h \
            plugins/interfaces/IFileDialog.h \
            plugins/interfaces/IIconTheme.h \
            plugins/interfaces/IGnomeInit.h \
-           plugins/interfaces/IKdeInit.h
+           plugins/interfaces/IKdeInit.h \
+    dialogs/ExportDlg.h
 
 SOURCES += main.cpp \
            mainwindow.cpp \
@@ -313,7 +315,8 @@ SOURCES += main.cpp \
            import/Import_PwManager.cpp \
            export/Export.cpp \
            export/Export_KeePassX_Xml.cpp \
-           export/Export_Txt.cpp
+           export/Export_Txt.cpp \
+    dialogs/ExportDlg.cpp
 
 isEqual(PRECOMPILED,0) {
 	QMAKE_CXXFLAGS += -include keepassx.h

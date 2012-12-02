@@ -26,7 +26,7 @@ class Export_Txt:public ExporterBase, public IExport{
 	Q_OBJECT
 	
 	public:
-		virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database);	
+        virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database, const QByteArray &key = QByteArray(), CryptedFields fields = NONE);
 		virtual QString identifier(){return "e_txt";}
 		virtual QString title(){return tr("Text File");}
 };

@@ -185,6 +185,111 @@ const QPixmap* getPixmap(const QString& name){
 	return NewPixmap;
 }
 
+static void crypt_fn(unsigned char ctr[16]) {
+    quint64 *low = (quint64 *)ctr;
+    quint64 *high = (quint64 *)ctr + sizeof(quint64);
+    (*low)--;
+    (*high)++;
+}
+
+void encrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password) {
+    AESencrypt aes;
+    SHA256 shaKey;
+    SHA256 shaHash;
+
+    // resize
+    int size = in.size();
+    out.resize(size + 64);
+
+    unsigned char *salt = (unsigned char *)out.data();
+    unsigned char *nonce = salt + 16;
+    unsigned char *hash = nonce + 16;
+    unsigned char *data = hash + 32;
+
+    unsigned char iv[16];
+    unsigned char pwd[32];
+
+    // iv
+    randomize(iv, 16);
+    memcpy(nonce, iv, 16);
+
+    // key
+    randomize(salt, 16);
+    shaKey.update(salt, 16);
+    shaKey.update(password.data(), password.size());
+    shaKey.finish(pwd);
+
+    // hash
+    shaHash.update(salt, 16);
+    shaHash.update(in.data(), size);
+    shaHash.finish(hash);
+
+    // encrypt
+    aes.key256(pwd);
+    aes.ctr_crypt((const unsigned char*)in.data(), data, size, iv, crypt_fn);
+}
+
+bool decrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password) {
+    AESencrypt aes;
+    SHA256 shaKey;
+    SHA256 shaHash;
+
+    // resize
+    int size = in.size();
+    size -= 64;
+    if(size < 0)
+        return false;
+    out.resize(size);
+
+    const unsigned char *salt = (unsigned char *)in.data();
+    const unsigned char *nonce = salt + 16;
+    const unsigned char *hash = nonce + 16;
+    const unsigned char *data = hash + 32;
+
+    unsigned char iv[16];
+    unsigned char pwd[32];
+    unsigned char hsh[32];
+
+    // iv
+    memcpy(iv, nonce, 16);
+
+    // key
+    shaKey.update(salt, 16);
+    shaKey.update(password.data(), password.size());
+    shaKey.finish(pwd);
+
+    // decrypt
+    aes.key256(pwd);
+    aes.ctr_crypt(data, (unsigned char*)out.data(), size, iv, crypt_fn);
+
+    // hash
+    shaHash.update(salt, 16);
+    shaHash.update(out.data(), size);
+    shaHash.finish(hsh);
+
+    return memcmp(hsh, hash, 32) == 0;
+}
+
+bool createCryptedKeyFile(const QString& outfilename,QString* err, const QString& infilename, const QString& password) {
+    QFile infile(infilename);
+    QFile outfile(outfilename);
+
+    if(!infile.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+        *err=decodeFileError(outfile.error());
+        return false;
+    }
+
+    if(!outfile.open(QIODevice::WriteOnly|QIODevice::Truncate|QIODevice::Unbuffered)){
+        *err=decodeFileError(outfile.error());
+        return false;
+    }
+
+    QByteArray out;
+    encrypt_data(infile.readAll(), out, password.toUtf8());
+    outfile.write(out);
+
+    return true;
+}
 
 bool createKeyFile(const QString& filename,QString* error,int length, bool Hex){
 	QFile file(filename);

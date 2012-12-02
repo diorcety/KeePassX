@@ -139,6 +139,8 @@ tKeyType KpxConfig::stringToKeyType(const QString& str){
 		res=KEYFILE;
 	else if (!str.compare("Composite",Qt::CaseInsensitive))
 		res=BOTH;
+    else if (!str.compare("CryptedKeyFile",Qt::CaseInsensitive))
+        res=CRYPTEDKEYFILE;
 	return res;
 }
 
@@ -207,6 +209,11 @@ QString KpxConfig::keyTypeToString(tKeyType keyType){
 
 		case BOTH:
 			res="Composite";
+            break;
+
+        case CRYPTEDKEYFILE:
+            res="CryptedKeyFile";
+            break;
 	}
 	return res;
 }
