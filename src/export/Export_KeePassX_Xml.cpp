@@ -78,36 +78,17 @@ void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomD
 	QDomElement Expire=doc.createElement("expire");	
 	
 	Title.appendChild(doc.createTextNode(entry->title()));
-    if(fields & IExport::USERNAME) {
-        QByteArray out;
-        encrypt_data(entry->username().toUtf8(), out, key);
-        Username.appendChild(doc.createTextNode(out.toHex()));
-        Username.setAttribute("crypted", true);
-    } else {
-        Username.appendChild(doc.createTextNode(entry->username()));
-    }
+    cryptElement(doc, Username, entry->username(), key, fields & IExport::USERNAME);
 	SecString password=entry->password();
 	password.unlock();
-    if(fields & IExport::PASSWORD) {
-        QByteArray out;
-        encrypt_data(password.string().toUtf8(), out, key);
-        Password.appendChild(doc.createTextNode(out.toHex()));
-        Password.setAttribute("crypted", true);
-    } else {
-        Password.appendChild(doc.createTextNode(password.string()));
-    }
+    cryptElement(doc, Password, password.string(), key, fields & IExport::PASSWORD);
 	password.lock();
-	Url.appendChild(doc.createTextNode(entry->url()));
-	QStringList CommentLines=entry->comment().split('\n');
-	for(int i=0;i<CommentLines.size();i++){
-		Comment.appendChild(doc.createTextNode(CommentLines[i]));
-		if(i==CommentLines.size()-1)break;
-		Comment.appendChild(doc.createElement("br"));
-	}
+    cryptElement(doc, Url, entry->url(), key, fields & IExport::URL);
+    cryptElement(doc, Comment, entry->comment(), key, fields & IExport::COMMENT);
 	bool HasAttachment=!entry->binary().isNull();
 	if(HasAttachment){
-		BinaryDesc.appendChild(doc.createTextNode(entry->binaryDesc()));
-		Binary.appendChild(doc.createTextNode(entry->binary().toBase64()));
+        cryptElement(doc, BinaryDesc, entry->binaryDesc(), key, fields & IExport::BINARY);
+        cryptElement(doc, Binary, entry->binary().toBase64(), key, fields & IExport::BINARY);
 	}
 	Icon.appendChild(doc.createTextNode(QString::number(entry->image())));
 	Creation.appendChild(doc.createTextNode(entry->creation().toString(Qt::ISODate)));
@@ -128,4 +109,15 @@ void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomD
 	GroupElement.appendChild(LastAccess);
 	GroupElement.appendChild(LastMod);
 	GroupElement.appendChild(Expire);
+}
+
+void Export_KeePassX_Xml::cryptElement(QDomDocument &document, QDomElement &element,const QString &str, const QByteArray &key, bool crypt) {
+    if(crypt) {
+        QByteArray out;
+        encrypt_data(str.toUtf8(), out, key);
+        element.appendChild(document.createTextNode(out.toBase64()));
+        element.setAttribute("crypted", true);
+    } else{
+        element.appendChild(document.createTextNode(str));
+    }
 }

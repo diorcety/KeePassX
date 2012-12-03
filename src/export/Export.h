@@ -22,12 +22,15 @@
 
 class IExport{
     public:
-        typedef enum {
-           NONE = 0,
-           USERNAME = 1 << 0,
-           PASSWORD = 1 << 1
-        } CryptedFields;
-		virtual ~IExport(){};
+    typedef enum {
+        NONE = 0,
+        USERNAME = (1 << 0),
+        PASSWORD = (1 << 1),
+        URL = (1 << 2),
+        COMMENT = (1 << 3),
+        BINARY = (1 << 4)
+    } CryptedFields;
+    virtual ~IExport(){};
     virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database,const QByteArray &key = QByteArray(),CryptedFields fields = NONE)=0;
 		virtual QString identifier()=0;
 		virtual QString title()=0;

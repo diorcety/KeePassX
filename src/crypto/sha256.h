@@ -38,7 +38,7 @@ class SHA256{
 	public:
 		SHA256(){sha256_starts(&ctx);}
 		~SHA256(){overwriteCtx(&ctx);};
-		void update(void* input,quint32 length){sha256_update(&ctx,(quint8*)input,length);}
+        void update(const void* input,quint32 length){sha256_update(&ctx,(quint8*)input,length);}
 		void finish(void* digest){sha256_finish(&ctx,(quint8*)digest);}
 		static void hashBuffer(const void* input, void* digest,quint32 length);
 	private:

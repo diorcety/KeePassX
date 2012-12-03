@@ -34,6 +34,7 @@ class Export_KeePassX_Xml:public ExporterBase, public IExport{
         void addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields);
         void addEntry(IEntryHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields);
 		IDatabase* db;
+        void cryptElement(QDomDocument &document, QDomElement &element,const QString &str, const QByteArray &key, bool crypt);
 };
 
 #endif

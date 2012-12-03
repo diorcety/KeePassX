@@ -135,11 +135,11 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
             entry->setUsername(decryptElement(ChildNodes.item(i).toElement(), key));
         } else if(ChildNodes.item(i).toElement().tagName()=="password"){
 			SecString pw;
-            pw.setString(decryptElement(ChildNodes.item(i).toElement(), key),true);
+            pw.setString(decryptElement(ChildNodes.item(i).toElement(), key));
 			entry->setPassword(pw);			
 		}
 		else if(ChildNodes.item(i).toElement().tagName()=="url")
-			entry->setUrl(ChildNodes.item(i).toElement().text());
+            entry->setUrl(decryptElement(ChildNodes.item(i).toElement(), key));
 		else if(ChildNodes.item(i).toElement().tagName()=="icon")
 			entry->setImage(ChildNodes.item(i).toElement().text().toInt());
 		else if(ChildNodes.item(i).toElement().tagName()=="creation")
@@ -151,23 +151,11 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
 		else if(ChildNodes.item(i).toElement().tagName()=="expire")
 			entry->setExpire(KpxDateTime::fromString(ChildNodes.item(i).toElement().text(),Qt::ISODate));
 		else if(ChildNodes.item(i).toElement().tagName()=="bindesc")
-			entry->setBinaryDesc(ChildNodes.item(i).toElement().text());
+            entry->setBinaryDesc(decryptElement(ChildNodes.item(i).toElement(), key));
 		else if(ChildNodes.item(i).toElement().tagName()=="bin")
-			entry->setBinary(QByteArray::fromBase64(ChildNodes.item(i).toElement().text().toAscii()));
+            entry->setBinary(QByteArray::fromBase64(decryptElement(ChildNodes.item(i).toElement(), key).toAscii()));
 		else if(ChildNodes.item(i).toElement().tagName()=="comment"){
-			QDomNodeList Lines=ChildNodes.item(i).childNodes();
-			QString comment;
-			for(int i=0;i<Lines.size();i++){
-				if(Lines.item(i).isText())
-					comment+=Lines.item(i).toText().data();
-				else if(Lines.item(i).toElement().tagName()=="br")
-					comment+="\n";
-				else{
-					qWarning("Import_KeePassX_Xml: Error: Comment element contains invalid nodes.");
-					return false;
-				}				
-			}
-			entry->setComment(comment);
+            entry->setComment(decryptElement(ChildNodes.item(i).toElement(), key));
 		}
 	}
 	return true;	
@@ -175,7 +163,7 @@ bool Import_KeePassX_Xml::parseEntry(const QDomElement& EntryElement,IGroupHandl
 
 QString Import_KeePassX_Xml::decryptElement(const QDomElement &element,const QByteArray &key) {
     if(element.hasAttribute("crypted") && element.attribute("crypted").toUInt()) {
-        QByteArray data = QByteArray::fromHex(element.text().toAscii());
+        QByteArray data = QByteArray::fromBase64(element.text().toAscii());
         QByteArray out;
         if(!decrypt_data(data, out, key)) {
             throw DecryptException();

@@ -17,9 +17,17 @@ IExport::CryptedFields ExportDlg::flags() {
         if(Check_Username->isChecked()) {
             flags = IExport::CryptedFields(flags | IExport::USERNAME);
         }
-
         if(Check_Password->isChecked()) {
             flags = IExport::CryptedFields(flags | IExport::PASSWORD);
+        }
+        if(Check_Url->isChecked()) {
+            flags = IExport::CryptedFields(flags | IExport::URL);
+        }
+        if(Check_Comment->isChecked()) {
+            flags = IExport::CryptedFields(flags | IExport::COMMENT);
+        }
+        if(Check_Binary->isChecked()) {
+            flags = IExport::CryptedFields(flags | IExport::BINARY);
         }
     }
     return flags;
