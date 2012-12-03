@@ -187,7 +187,7 @@ const QPixmap* getPixmap(const QString& name){
 
 static void crypt_fn(unsigned char ctr[16]) {
     quint64 *low = (quint64 *)ctr;
-    quint64 *high = (quint64 *)ctr + sizeof(quint64);
+    quint64 *high = low++;
     (*low)--;
     (*high)++;
 }

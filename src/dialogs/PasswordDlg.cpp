@@ -376,6 +376,8 @@ void PasswordDialog::OnBookmarkTriggered(QAction* action){
 }
 
 void PasswordDialog::OnEncryptFile(){
+    Password=Edit_Password->text();
+    KeyFile=Combo_KeyFile->currentText();
     if(!Check_Password->isChecked() && !Check_KeyFile->isChecked()){
         showErrMsg(tr("Please enter a Password and select a file."),this);
         return;
@@ -409,6 +411,8 @@ void PasswordDialog::OnEncryptFile(){
 }
 
 void PasswordDialog::OnDecryptFile(){
+    Password=Edit_Password->text();
+    KeyFile=Combo_KeyFile->currentText();
     if(!Check_Password->isChecked() && !Check_KeyFile->isChecked()){
         showErrMsg(tr("Please enter a Password and select a crypted file."),this);
         return;
