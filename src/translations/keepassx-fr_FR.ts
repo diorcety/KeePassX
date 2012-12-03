@@ -1328,6 +1328,41 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ExportDlg</name>
+    <message>
+        <source>Export</source>
+        <translation>Exporter</translation>
+    </message>
+    <message>
+        <source>Crypt</source>
+        <translation>Chiffrement</translation>
+    </message>
+    <message>
+        <source>Crypted fields</source>
+        <translation>Champs chiffrés</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation>Nom d&apos;utilisateur</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Mot de passe</translation>
+    </message>
+    <message>
+        <source>Url</source>
+        <translation>Url</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Commentaire</translation>
+    </message>
+    <message>
+        <source>Binary</source>
+        <translation>Binaire</translation>
+    </message>
+</context>
+<context>
     <name>Export_KeePassX_Xml</name>
     <message>
         <source>XML Files (*.xml)</source>
@@ -1833,24 +1868,40 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
         <source>Unable to initalize the twofish algorithm.</source>
         <translation type="obsolete">Impossible d&apos;initialiser l&apos;algorithme twofish.</translation>
     </message>
+    <message>
+        <source>Bytes</source>
+        <translation type="unfinished">Octets</translation>
+    </message>
+    <message>
+        <source>KiB</source>
+        <translation type="unfinished">kio</translation>
+    </message>
+    <message>
+        <source>MiB</source>
+        <translation type="unfinished">Mio</translation>
+    </message>
+    <message>
+        <source>GiB</source>
+        <translation type="unfinished">Gio</translation>
+    </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
         <source>Bytes</source>
-        <translation>Octets</translation>
+        <translation type="obsolete">Octets</translation>
     </message>
     <message>
         <source>KiB</source>
-        <translation>kio</translation>
+        <translation type="obsolete">kio</translation>
     </message>
     <message>
         <source>MiB</source>
-        <translation>Mio</translation>
+        <translation type="obsolete">Mio</translation>
     </message>
     <message>
         <source>GiB</source>
-        <translation>Gio</translation>
+        <translation type="obsolete">Gio</translation>
     </message>
 </context>
 <context>
@@ -2881,6 +2932,34 @@ File is not readable.</source>
         <source>Create Key File...</source>
         <translation>Créer le fichier clé...</translation>
     </message>
+    <message>
+        <source>Invalid crypted file or password</source>
+        <translation>Mot de passe ou fichier chiffré invalide</translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a file.</source>
+        <translation>Veuillez entrer un mode passe et selectionner un fichier.</translation>
+    </message>
+    <message>
+        <source>Please provide a file.</source>
+        <translation>Sélectionner un fichier.</translation>
+    </message>
+    <message>
+        <source>Encrypt File...</source>
+        <translation>Chiffrement de fichier...</translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a crypted file.</source>
+        <translation>Entrer un mot de passe et sélectionner un fichier clé.</translation>
+    </message>
+    <message>
+        <source>Please provide a crypted file.</source>
+        <translation>Veuillez selectionner un fichier chiffré.</translation>
+    </message>
+    <message>
+        <source>Decrypt File...</source>
+        <translation>Déchiffrement de fichier...</translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -2955,6 +3034,18 @@ File is not readable.</source>
     <message>
         <source>Passwords are not equal.</source>
         <translation>Les mots de passe ne sont pas identiques.</translation>
+    </message>
+    <message>
+        <source>Encrypt file</source>
+        <translation>Chiffrer fichier</translation>
+    </message>
+    <message>
+        <source>Composite</source>
+        <translation>Composite</translation>
+    </message>
+    <message>
+        <source>Decrypt file</source>
+        <translation>Déchiffrer fichier</translation>
     </message>
 </context>
 <context>
@@ -3761,6 +3852,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Close Database</source>
         <translation>Fermer la base de données</translation>
+    </message>
+</context>
+<context>
+    <name>crypt</name>
+    <message>
+        <source>Encryption error</source>
+        <translation>Erreur de chiffrement</translation>
+    </message>
+    <message>
+        <source>Decryption error: maybe an invalid file or password</source>
+        <translation>Erreur de déchiffrement: Verifiez le fichier ou le mot de passe</translation>
     </message>
 </context>
 <context>

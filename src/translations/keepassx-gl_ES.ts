@@ -881,6 +881,41 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ExportDlg</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crypted fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Nome de usuario</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished">Contrasinal</translation>
+    </message>
+    <message>
+        <source>Url</source>
+        <translation type="unfinished">URL</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Comentario</translation>
+    </message>
+    <message>
+        <source>Binary</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Export_KeePassX_Xml</name>
     <message>
         <source>All Files (*)</source>
@@ -1342,24 +1377,40 @@ A chave é incorrecta ou está danada.</translation>
         <source>Unknown encryption algorithm.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bytes</source>
+        <translation type="unfinished">Bytes</translation>
+    </message>
+    <message>
+        <source>KiB</source>
+        <translation type="unfinished">KB</translation>
+    </message>
+    <message>
+        <source>MiB</source>
+        <translation type="unfinished">MB</translation>
+    </message>
+    <message>
+        <source>GiB</source>
+        <translation type="unfinished">GB</translation>
+    </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
         <source>Bytes</source>
-        <translation>Bytes</translation>
+        <translation type="obsolete">Bytes</translation>
     </message>
     <message>
         <source>GiB</source>
-        <translation>GB</translation>
+        <translation type="obsolete">GB</translation>
     </message>
     <message>
         <source>KiB</source>
-        <translation>KB</translation>
+        <translation type="obsolete">KB</translation>
     </message>
     <message>
         <source>MiB</source>
-        <translation>MB</translation>
+        <translation type="obsolete">MB</translation>
     </message>
 </context>
 <context>
@@ -2102,6 +2153,34 @@ Especifique un ficheiro de claves directamente.</translation>
         <source>The selected key file or directory is not readable.</source>
         <translation>Non foi posibel ler o ficheiro ou directorio chave seleccionado.</translation>
     </message>
+    <message>
+        <source>Invalid crypted file or password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -2148,6 +2227,18 @@ Especifique un ficheiro de claves directamente.</translation>
     <message>
         <source>Please repeat your password:</source>
         <translation>Repita o contrasinal:</translation>
+    </message>
+    <message>
+        <source>Encrypt file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Composite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrypt file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2643,6 +2734,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Unlock</source>
         <translation>Desbloquear</translation>
+    </message>
+</context>
+<context>
+    <name>crypt</name>
+    <message>
+        <source>Encryption error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decryption error: maybe an invalid file or password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

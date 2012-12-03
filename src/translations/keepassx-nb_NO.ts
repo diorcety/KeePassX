@@ -822,6 +822,41 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ExportDlg</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crypted fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Brukernavn</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished">Passord</translation>
+    </message>
+    <message>
+        <source>Url</source>
+        <translation type="unfinished">Url</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Kommentar</translation>
+    </message>
+    <message>
+        <source>Binary</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Export_KeePassX_Xml</name>
     <message>
         <source>KeePassX XML File</source>
@@ -1266,24 +1301,40 @@ The key is wrong or the file is damaged.</source>
         <source>The database has been opened read-only.</source>
         <translation>Databsen er åpnet for bare-les.</translation>
     </message>
+    <message>
+        <source>Bytes</source>
+        <translation type="unfinished">bytes</translation>
+    </message>
+    <message>
+        <source>KiB</source>
+        <translation type="unfinished">KiB</translation>
+    </message>
+    <message>
+        <source>MiB</source>
+        <translation type="unfinished">MiB</translation>
+    </message>
+    <message>
+        <source>GiB</source>
+        <translation type="unfinished">GiB</translation>
+    </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
         <source>Bytes</source>
-        <translation>bytes</translation>
+        <translation type="obsolete">bytes</translation>
     </message>
     <message>
         <source>KiB</source>
-        <translation>KiB</translation>
+        <translation type="obsolete">KiB</translation>
     </message>
     <message>
         <source>MiB</source>
-        <translation>MiB</translation>
+        <translation type="obsolete">MiB</translation>
     </message>
     <message>
         <source>GiB</source>
-        <translation>GiB</translation>
+        <translation type="obsolete">GiB</translation>
     </message>
 </context>
 <context>
@@ -1998,6 +2049,34 @@ File is not readable.</source>
         <source>Create Key File...</source>
         <translation>Lag nøkkelfil...</translation>
     </message>
+    <message>
+        <source>Invalid crypted file or password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a Password and select a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please provide a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -2044,6 +2123,18 @@ File is not readable.</source>
     <message>
         <source>Passwords are not equal.</source>
         <translation>Passordene er ikke like.</translation>
+    </message>
+    <message>
+        <source>Encrypt file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Composite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrypt file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2513,6 +2604,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Close Database</source>
         <translation>Lukk database</translation>
+    </message>
+</context>
+<context>
+    <name>crypt</name>
+    <message>
+        <source>Encryption error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decryption error: maybe an invalid file or password</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

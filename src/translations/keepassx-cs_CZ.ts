@@ -219,9 +219,9 @@ General Public License (GPL) verze 2.</translation>
 <context>
     <name>AddBookmarkDlg</name>
     <message>
+        <location filename="../forms/AddBookmarkDlg.ui" line="32"/>
         <location filename="../dialogs/AddBookmarkDlg.cpp" line="32"/>
         <location filename="../dialogs/AddBookmarkDlg.cpp" line="56"/>
-        <location filename="../forms/AddBookmarkDlg.ui" line="32"/>
         <source>Add Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1250,52 +1250,52 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DetailViewTemplate</name>
     <message>
-        <location filename="../KpxConfig.cpp" line="258"/>
+        <location filename="../KpxConfig.cpp" line="265"/>
         <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="259"/>
+        <location filename="../KpxConfig.cpp" line="266"/>
         <source>Title</source>
         <translation type="unfinished">Název</translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="260"/>
+        <location filename="../KpxConfig.cpp" line="267"/>
         <source>Username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="261"/>
+        <location filename="../KpxConfig.cpp" line="268"/>
         <source>Password</source>
         <translation type="unfinished">Heslo</translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="262"/>
+        <location filename="../KpxConfig.cpp" line="269"/>
         <source>URL</source>
         <translation type="unfinished">URL</translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="263"/>
+        <location filename="../KpxConfig.cpp" line="270"/>
         <source>Creation</source>
         <translation type="unfinished">Vytvoření</translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="264"/>
+        <location filename="../KpxConfig.cpp" line="271"/>
         <source>Last Access</source>
         <translation type="unfinished">Poslední přístup</translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="265"/>
+        <location filename="../KpxConfig.cpp" line="272"/>
         <source>Last Modification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="266"/>
+        <location filename="../KpxConfig.cpp" line="273"/>
         <source>Expiration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KpxConfig.cpp" line="267"/>
+        <location filename="../KpxConfig.cpp" line="274"/>
         <source>Comment</source>
         <translation type="unfinished">Komentář</translation>
     </message>
@@ -1485,6 +1485,49 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../dialogs/ExpiredEntriesDlg.cpp" line="50"/>
         <source>Expired Entries in the Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExportDlg</name>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="14"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="20"/>
+        <source>Crypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="27"/>
+        <source>Crypted fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="33"/>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="40"/>
+        <source>Password</source>
+        <translation type="unfinished">Heslo</translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="47"/>
+        <source>Url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="54"/>
+        <source>Comment</source>
+        <translation type="unfinished">Komentář</translation>
+    </message>
+    <message>
+        <location filename="../forms/ExportDlg.ui" line="61"/>
+        <source>Binary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1892,33 +1935,33 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Import_KeePassX_Xml</name>
     <message>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="27"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="28"/>
         <source>KeePass XML Files (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="27"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="28"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="34"/>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="41"/>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="49"/>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="53"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="35"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="42"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="77"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="81"/>
         <source>Import Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="34"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="35"/>
         <source>XML parsing error on line %1 column %2:
 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="41"/>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="49"/>
-        <location filename="../import/Import_KeePassX_Xml.cpp" line="53"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="42"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="77"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="81"/>
         <source>Parsing error: File is no valid KeePassX XML file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2014,7 +2057,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../Kdb3Database.cpp" line="524"/>
         <location filename="../Kdb3Database.cpp" line="533"/>
-        <location filename="../Kdb3Database.cpp" line="1359"/>
+        <location filename="../Kdb3Database.cpp" line="1368"/>
         <source>Could not open file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2088,12 +2131,32 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="955"/>
+        <location filename="../Kdb3Database.cpp" line="964"/>
         <source>Key file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1353"/>
+        <location filename="../Kdb3Database.cpp" line="1225"/>
+        <source>Bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1233"/>
+        <source>KiB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1239"/>
+        <source>MiB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1244"/>
+        <source>GiB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1362"/>
         <source>The database must contain at least one group.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2112,31 +2175,8 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1365"/>
+        <location filename="../Kdb3Database.cpp" line="1374"/>
         <source>The database has been opened read-only.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Kdb3Database::EntryHandle</name>
-    <message>
-        <location filename="../Kdb3Database.cpp" line="1216"/>
-        <source>Bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Kdb3Database.cpp" line="1224"/>
-        <source>KiB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Kdb3Database.cpp" line="1230"/>
-        <source>MiB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Kdb3Database.cpp" line="1235"/>
-        <source>GiB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2207,17 +2247,17 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="380"/>
+        <location filename="../lib/EntryView.cpp" line="382"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="380"/>
+        <location filename="../lib/EntryView.cpp" line="382"/>
         <source>At least one group must exist before adding an entry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="380"/>
+        <location filename="../lib/EntryView.cpp" line="382"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -2257,98 +2297,98 @@ Klíč je chybný nebo je soubor poškozen.</translation>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+N</source>
         <translation type="unfinished">Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="375"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="385"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1505"/>
-        <location filename="../mainwindow.cpp" line="1519"/>
+        <location filename="../mainwindow.cpp" line="1541"/>
+        <location filename="../mainwindow.cpp" line="1555"/>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="382"/>
+        <location filename="../mainwindow.cpp" line="383"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="383"/>
+        <location filename="../mainwindow.cpp" line="384"/>
         <source>Shift+Ctrl+F</source>
         <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="417"/>
-        <location filename="../mainwindow.cpp" line="497"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="556"/>
-        <location filename="../mainwindow.cpp" line="939"/>
-        <location filename="../mainwindow.cpp" line="951"/>
+        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="958"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -2363,7 +2403,7 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Save modified file?</source>
         <translation>Uložit změněný soubor?</translation>
     </message>
@@ -2394,30 +2434,30 @@ změny uloženy? </translation>
         <translation type="obsolete">&lt;B&gt;Skupina: &lt;/B&gt;%1  &lt;B&gt;Název: &lt;/B&gt;%2  &lt;B&gt;Uživ. jméno: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Heslo: &lt;/B&gt;%5  &lt;B&gt;Vytvořeno: &lt;/B&gt;%6  &lt;B&gt;Poslední změna: &lt;/B&gt;%7  &lt;B&gt;Poslední přístup: &lt;/B&gt;%8  &lt;B&gt;Vyprší: &lt;/B&gt;%9</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="814"/>
-        <location filename="../mainwindow.cpp" line="829"/>
-        <location filename="../mainwindow.cpp" line="865"/>
-        <location filename="../mainwindow.cpp" line="880"/>
+        <location filename="../mainwindow.cpp" line="821"/>
+        <location filename="../mainwindow.cpp" line="836"/>
+        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="887"/>
         <source>Clone Entry</source>
         <translation>Naklonovat záznam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="816"/>
-        <location filename="../mainwindow.cpp" line="831"/>
-        <location filename="../mainwindow.cpp" line="867"/>
-        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="838"/>
+        <location filename="../mainwindow.cpp" line="874"/>
+        <location filename="../mainwindow.cpp" line="889"/>
         <source>Delete Entry</source>
         <translation>Smazat záznam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="844"/>
-        <location filename="../mainwindow.cpp" line="895"/>
+        <location filename="../mainwindow.cpp" line="851"/>
+        <location filename="../mainwindow.cpp" line="902"/>
         <source>Clone Entries</source>
         <translation>Naklonovat záznamy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="846"/>
-        <location filename="../mainwindow.cpp" line="897"/>
+        <location filename="../mainwindow.cpp" line="853"/>
+        <location filename="../mainwindow.cpp" line="904"/>
         <source>Delete Entries</source>
         <translation>Smazat záznamy</translation>
     </message>
@@ -2432,7 +2472,7 @@ změny uloženy? </translation>
         <translation type="obsolete">Uložit databázi jako ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1482"/>
+        <location filename="../mainwindow.cpp" line="1518"/>
         <source>Ready</source>
         <translation>Připraveno</translation>
     </message>
@@ -2441,17 +2481,17 @@ změny uloženy? </translation>
         <translation type="obsolete">[nový]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="623"/>
+        <location filename="../mainwindow.cpp" line="630"/>
         <source>Open Database...</source>
         <translation>Otevřít databázi ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1485"/>
+        <location filename="../mainwindow.cpp" line="1521"/>
         <source>Loading Database...</source>
         <translation>Otevírání databáze ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1488"/>
+        <location filename="../mainwindow.cpp" line="1524"/>
         <source>Loading Failed</source>
         <translation>Otevření selhalo</translation>
     </message>
@@ -2482,7 +2522,7 @@ změny uloženy? </translation>
         <translation type="obsolete">Neznámá chyba v PwDatabase::openDatabase()</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
@@ -2495,143 +2535,143 @@ změny uloženy? </translation>
         <translation type="obsolete">KeePassX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="496"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>Unknown error while loading database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="623"/>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="630"/>
+        <location filename="../mainwindow.cpp" line="940"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="623"/>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="630"/>
+        <location filename="../mainwindow.cpp" line="940"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="940"/>
         <source>Save Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="768"/>
+        <location filename="../mainwindow.cpp" line="775"/>
         <source>1 Month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="777"/>
         <source>%1 Months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="776"/>
+        <location filename="../mainwindow.cpp" line="783"/>
         <source>1 Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="778"/>
+        <location filename="../mainwindow.cpp" line="785"/>
         <source>%1 Years</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="784"/>
+        <location filename="../mainwindow.cpp" line="791"/>
         <source>1 Day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="786"/>
+        <location filename="../mainwindow.cpp" line="793"/>
         <source>%1 Days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="790"/>
+        <location filename="../mainwindow.cpp" line="797"/>
         <source>less than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="417"/>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>The database file does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="939"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Couldn&apos;t create database lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1503"/>
-        <location filename="../mainwindow.cpp" line="1517"/>
+        <location filename="../mainwindow.cpp" line="1539"/>
+        <location filename="../mainwindow.cpp" line="1553"/>
         <source>new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="754"/>
+        <location filename="../mainwindow.cpp" line="761"/>
         <source>Expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1375"/>
+        <location filename="../mainwindow.cpp" line="1411"/>
         <source>Un&amp;lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1390"/>
+        <location filename="../mainwindow.cpp" line="1426"/>
         <source>&amp;Lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="502"/>
         <source>The following error occured while opening the database:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="926"/>
-        <location filename="../mainwindow.cpp" line="944"/>
+        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="951"/>
         <source>File could not be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="315"/>
-        <location filename="../mainwindow.cpp" line="1147"/>
+        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="1183"/>
         <source>Show &amp;Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="377"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="426"/>
+        <location filename="../mainwindow.cpp" line="427"/>
         <source>Database locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="427"/>
+        <location filename="../mainwindow.cpp" line="428"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -2639,24 +2679,24 @@ Do you want to open it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="538"/>
+        <location filename="../mainwindow.cpp" line="542"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="556"/>
-        <location filename="../mainwindow.cpp" line="951"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="958"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="434"/>
         <source>Open read-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1491"/>
+        <location filename="../mainwindow.cpp" line="1527"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3180,8 +3220,8 @@ Do you want to save the changes?</source>
 <context>
     <name>ManageBookmarksDlg</name>
     <message>
-        <location filename="../dialogs/ManageBookmarksDlg.cpp" line="56"/>
         <location filename="../forms/ManageBookmarksDlg.ui" line="19"/>
+        <location filename="../dialogs/ManageBookmarksDlg.cpp" line="56"/>
         <source>Manage Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3209,73 +3249,114 @@ Do you want to save the changes?</source>
         <translation type="unfinished">Klíč k databázi</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="132"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="143"/>
         <source>Last File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="178"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="192"/>
         <source>Select a Key File</source>
         <translation type="unfinished">Vyberte soubor s klíčem</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="179"/>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="193"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="397"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="432"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="450"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="180"/>
-        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="194"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="398"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="433"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="451"/>
         <source>Key Files (*.key)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="206"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="220"/>
         <source>Please enter a Password or select a key file.</source>
         <translation type="unfinished">Vložte prosím heslo nebo vyberte soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="211"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="225"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="387"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="422"/>
         <source>Please enter a Password.</source>
         <translation type="unfinished">Vložte prosím heslo.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="216"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="230"/>
         <source>Please provide a key file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="224"/>
-        <location filename="../dialogs/PasswordDlg.cpp" line="262"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="238"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="276"/>
         <source>%1:
 No such file or directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="228"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="242"/>
         <source>The selected key file or directory is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="247"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="261"/>
         <source>The given directory does not contain any key files.</source>
         <translation type="unfinished">Daný adresář neobsahuje žádné soubory s klíči.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="252"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="266"/>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="266"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="280"/>
         <source>%1:
 File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="340"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="305"/>
+        <source>Invalid crypted file or password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="382"/>
+        <source>Please enter a Password and select a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="392"/>
+        <source>Please provide a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="396"/>
+        <source>Encrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="417"/>
+        <source>Please enter a Password and select a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="427"/>
+        <source>Please provide a crypted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="431"/>
+        <source>Decrypt File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="449"/>
         <source>Create Key File...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3299,17 +3380,17 @@ File is not readable.</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="100"/>
+        <location filename="../forms/PasswordDlg.ui" line="101"/>
         <source>Enter a Password and/or choose a key file.</source>
         <translation>Vložit heslo nebo vybrat soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="113"/>
+        <location filename="../forms/PasswordDlg.ui" line="114"/>
         <source>Key</source>
         <translation>Klíč</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="137"/>
+        <location filename="../forms/PasswordDlg.ui" line="180"/>
         <source>Password:</source>
         <translation>Heslo:</translation>
     </message>
@@ -3318,7 +3399,7 @@ File is not readable.</source>
         <translation type="obsolete">Soubor s klíčem nebo adresář:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="191"/>
+        <location filename="../forms/PasswordDlg.ui" line="211"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Projít...</translation>
     </message>
@@ -3339,32 +3420,47 @@ File is not readable.</source>
         <translation type="obsolete">Zopakování hesla:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="73"/>
+        <location filename="../forms/PasswordDlg.ui" line="74"/>
         <source>Last File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="163"/>
+        <location filename="../forms/PasswordDlg.ui" line="130"/>
         <source>Key File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="200"/>
+        <location filename="../forms/PasswordDlg.ui" line="153"/>
+        <source>Encrypt file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/PasswordDlg.ui" line="160"/>
         <source>Generate Key File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="232"/>
+        <location filename="../forms/PasswordDlg.ui" line="220"/>
+        <source>Composite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/PasswordDlg.ui" line="230"/>
+        <source>Decrypt file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/PasswordDlg.ui" line="241"/>
         <source>Please repeat your password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="250"/>
+        <location filename="../forms/PasswordDlg.ui" line="259"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="277"/>
+        <location filename="../forms/PasswordDlg.ui" line="286"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4210,7 +4306,7 @@ from the drop-down list, or enter the window title manually:</source>
     <name>Translation</name>
     <message>
         <location filename="../dialogs/AboutDlg.cpp" line="34"/>
-        <location filename="../lib/tools.cpp" line="352"/>
+        <location filename="../lib/tools.cpp" line="487"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation type="unfinished">Marek Straka</translation>
     </message>
@@ -4221,7 +4317,7 @@ from the drop-down list, or enter the window title manually:</source>
         <translation type="unfinished">marek@straka.info (&lt;a href=&quot;http://marek.straka.info&quot;&gt;marek.straka.info&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="351"/>
+        <location filename="../lib/tools.cpp" line="486"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
         <translation type="unfinished"></translation>
@@ -4257,6 +4353,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/WorkspaceLockedWidget.ui" line="99"/>
         <source>Close Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>crypt</name>
+    <message>
+        <location filename="../lib/tools.cpp" line="292"/>
+        <source>Encryption error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/tools.cpp" line="316"/>
+        <source>Decryption error: maybe an invalid file or password</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

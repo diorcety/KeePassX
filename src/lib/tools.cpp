@@ -32,34 +32,34 @@
 #endif
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
-	createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
+    createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
 }
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor){
-	*Pixmap=QPixmap(Width,50);
-	QPainter painter(Pixmap);
-	QLinearGradient grad(0,0,Width,0);
-	grad.setColorAt(0,Color1);
-	grad.setColorAt(1,Color2);
-	painter.setPen(Qt::NoPen);
-	painter.setBrush(grad);
-	painter.drawRect(0,0,Width,50);
-	
-	QPixmap Icon(32,32);
-	if(IconAlpha){
-		Icon.fill(TextColor);
-		Icon.setAlphaChannel(*IconAlpha);
-		painter.drawPixmap(10,10,Icon);
-	}
-	
-	painter.setPen(QPen(TextColor));
-	painter.setFont(QFont(QApplication::font().family(),16));
-	painter.drawText(50,35,Text);
+    *Pixmap=QPixmap(Width,50);
+    QPainter painter(Pixmap);
+    QLinearGradient grad(0,0,Width,0);
+    grad.setColorAt(0,Color1);
+    grad.setColorAt(1,Color2);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(grad);
+    painter.drawRect(0,0,Width,50);
+
+    QPixmap Icon(32,32);
+    if(IconAlpha){
+        Icon.fill(TextColor);
+        Icon.setAlphaChannel(*IconAlpha);
+        painter.drawPixmap(10,10,Icon);
+    }
+
+    painter.setPen(QPen(TextColor));
+    painter.setFont(QFont(QApplication::font().family(),16));
+    painter.drawText(50,35,Text);
 }
 
 QString decodeFileError(QFile::FileError Code){
-	switch(Code){
-		case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
+    switch(Code){
+        case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
 		case QFile::ReadError: return QApplication::translate("FileErrors","An error occurred while reading from the file.");
 		case QFile::WriteError: return QApplication::translate("FileErrors","An error occurred while writing to the file.");
 		case QFile::FatalError: return QApplication::translate("FileErrors","A fatal error occurred.");
@@ -289,7 +289,7 @@ bool encryptFile(const QString& outfilename, QString* err, const QString& infile
 
     QByteArray out;
     if(!encrypt_data(infile.readAll(), out, password.toUtf8())) {
-        *err="Encryption error";
+        *err=QApplication::translate("crypt", "Encryption error");
         return false;
     }
     outfile.write(out);
@@ -313,7 +313,7 @@ bool decryptFile(const QString& outfilename, QString* err, const QString& infile
 
     QByteArray out;
     if(!decrypt_data(infile.readAll(), out, password.toUtf8())) {
-        *err="Decryption error: maybe an invalid file or password";
+        *err=QApplication::translate("crypt", "Decryption error: maybe an invalid file or password");
         return false;
     }
     outfile.write(out);
