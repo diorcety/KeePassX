@@ -61,6 +61,8 @@ class PasswordDialog : public QDialog, private Ui_PasswordDlg {
 		void OnButtonBrowse();
 		void OnButtonQuit();
 		void OnGenKeyFile();
+        void OnEncryptFile();
+        void OnDecryptFile();
 		void OnButtonBack();
 		void ChangeEchoModeDatabaseKey();
 		void OnBookmarkTriggered(QAction* action);

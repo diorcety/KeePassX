@@ -192,7 +192,7 @@ static void crypt_fn(unsigned char ctr[16]) {
     (*high)++;
 }
 
-void encrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password) {
+bool encrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password) {
     AESencrypt aes;
     SHA256 shaKey;
     SHA256 shaHash;
@@ -226,7 +226,7 @@ void encrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& passw
 
     // encrypt
     aes.key256(pwd);
-    aes.ctr_crypt((const unsigned char*)in.data(), data, size, iv, crypt_fn);
+    return aes.ctr_crypt((const unsigned char*)in.data(), data, size, iv, crypt_fn) == EXIT_SUCCESS;
 }
 
 bool decrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& password) {
@@ -260,17 +260,20 @@ bool decrypt_data(const QByteArray& in, QByteArray& out, const QByteArray& passw
 
     // decrypt
     aes.key256(pwd);
-    aes.ctr_crypt(data, (unsigned char*)out.data(), size, iv, crypt_fn);
+    if(aes.ctr_crypt(data, (unsigned char*)out.data(), size, iv, crypt_fn) != EXIT_SUCCESS) {
+        return false;
+    }
 
     // hash
     shaHash.update(salt, 16);
     shaHash.update(out.data(), size);
     shaHash.finish(hsh);
 
+    // Check correct password
     return memcmp(hsh, hash, 32) == 0;
 }
 
-bool createCryptedKeyFile(const QString& outfilename,QString* err, const QString& infilename, const QString& password) {
+bool encryptFile(const QString& outfilename, QString* err, const QString& infilename, const QString& password) {
     QFile infile(infilename);
     QFile outfile(outfilename);
 
@@ -285,7 +288,34 @@ bool createCryptedKeyFile(const QString& outfilename,QString* err, const QString
     }
 
     QByteArray out;
-    encrypt_data(infile.readAll(), out, password.toUtf8());
+    if(!encrypt_data(infile.readAll(), out, password.toUtf8())) {
+        *err="Encryption error";
+        return false;
+    }
+    outfile.write(out);
+
+    return true;
+}
+
+bool decryptFile(const QString& outfilename, QString* err, const QString& infilename, const QString& password) {
+    QFile infile(infilename);
+    QFile outfile(outfilename);
+
+    if(!infile.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+        *err=decodeFileError(outfile.error());
+        return false;
+    }
+
+    if(!outfile.open(QIODevice::WriteOnly|QIODevice::Truncate|QIODevice::Unbuffered)){
+        *err=decodeFileError(outfile.error());
+        return false;
+    }
+
+    QByteArray out;
+    if(!decrypt_data(infile.readAll(), out, password.toUtf8())) {
+        *err="Decryption error: maybe an invalid file or password";
+        return false;
+    }
     outfile.write(out);
 
     return true;

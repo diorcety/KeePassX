@@ -35,6 +35,9 @@ class Export_KeePassX_Xml:public ExporterBase, public IExport{
         void addEntry(IEntryHandle* group,QDomElement& parent,QDomDocument& doc,const QByteArray &key,CryptedFields fields);
 		IDatabase* db;
         void cryptElement(QDomDocument &document, QDomElement &element,const QString &str, const QByteArray &key, bool crypt);
+        class EncryptException: public std::exception {
+
+        };
 };
 
 #endif

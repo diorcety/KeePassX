@@ -83,7 +83,7 @@ bool Import_KeePassX_Xml::importDatabase(QWidget* Parent, IDatabase* database){
         }
         return true;
     } catch(DecryptException &) {
-        showErrMsg("Invalid password.");
+        showErrMsg("Decryption error: maybe an invalid file or password");
         return false;
     }
 }

@@ -167,6 +167,8 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL( clicked() ), this, SLOT( OnOK() ) );
 	connect(Button_Browse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 	connect(Button_GenKeyFile,SIGNAL(clicked()),this,SLOT(OnGenKeyFile()));
+    connect(Button_EncryptFile,SIGNAL(clicked()),this,SLOT(OnEncryptFile()));
+    connect(Button_DecryptFile,SIGNAL(clicked()),this,SLOT(OnDecryptFile()));
     connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
     connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
     connect(Check_Composite,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
@@ -335,7 +337,9 @@ void PasswordDialog::OnCheckBoxesChanged(){
 	Edit_Password->setEnabled(Check_Password->isChecked());
 	Combo_KeyFile->setEnabled(Check_KeyFile->isChecked());
 	Button_Browse->setEnabled(Check_KeyFile->isChecked());
-	Button_GenKeyFile->setEnabled(Check_KeyFile->isChecked());	
+    Button_GenKeyFile->setEnabled(Check_KeyFile->isChecked());
+    Button_EncryptFile->setEnabled(Check_KeyFile->isChecked() && Check_Password->isChecked());
+    Button_DecryptFile->setEnabled(Check_KeyFile->isChecked() && Check_Password->isChecked());
 }
 
 void PasswordDialog::ChangeEchoModeDatabaseKey(){
@@ -371,11 +375,76 @@ void PasswordDialog::OnBookmarkTriggered(QAction* action){
 	BookmarkFilename=action->data().toString();
 }
 
+void PasswordDialog::OnEncryptFile(){
+    if(!Check_Password->isChecked() && !Check_KeyFile->isChecked()){
+        showErrMsg(tr("Please enter a Password and select a file."),this);
+        return;
+    }
+
+    if(Check_Password->isChecked() && Password.isEmpty()){
+        showErrMsg(tr("Please enter a Password."));
+        return;
+    }
+
+    if(Check_KeyFile->isChecked() && KeyFile.isEmpty()){
+        showErrMsg(tr("Please provide a file."));
+        return;
+    }
+
+    QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Encrypt File..."),
+                                              QStringList() << tr("All Files (*)")
+                                                            << tr("Key Files (*.key)"));
+
+    if(!filename.isEmpty()) {
+        QString error;
+        if(!encryptFile(filename,&error,Combo_KeyFile->currentText(),Edit_Password->text())){
+            showErrMsg(error,this);
+            return;
+        }
+        else {
+            Combo_KeyFile->setEditText(filename);
+            return;
+        }
+    }
+}
+
+void PasswordDialog::OnDecryptFile(){
+    if(!Check_Password->isChecked() && !Check_KeyFile->isChecked()){
+        showErrMsg(tr("Please enter a Password and select a crypted file."),this);
+        return;
+    }
+
+    if(Check_Password->isChecked() && Password.isEmpty()){
+        showErrMsg(tr("Please enter a Password."));
+        return;
+    }
+
+    if(Check_KeyFile->isChecked() && KeyFile.isEmpty()){
+        showErrMsg(tr("Please provide a crypted file."));
+        return;
+    }
+
+    QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Decrypt File..."),
+                                              QStringList() << tr("All Files (*)")
+                                                            << tr("Key Files (*.key)"));
+
+    if(!filename.isEmpty()) {
+        QString error;
+        if(!decryptFile(filename,&error,Combo_KeyFile->currentText(),Edit_Password->text())){
+            showErrMsg(error,this);
+            return;
+        }
+        else {
+            Combo_KeyFile->setEditText(filename);
+            return;
+        }
+    }
+}
+
 void PasswordDialog::OnGenKeyFile(){
 	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Create Key File..."),
 	                                          QStringList() << tr("All Files (*)")
 	                                                        << tr("Key Files (*.key)"));
-    if(Check_Composite->isChecked()) {
         if(!filename.isEmpty()){
             QString error;
             if(!createKeyFile(filename,&error,32,true)){
@@ -388,19 +457,6 @@ void PasswordDialog::OnGenKeyFile(){
                 return;
             }
         }
-    } else {
-        if(!filename.isEmpty() && Check_KeyFile->isChecked() && !Combo_KeyFile->currentText().isEmpty() && Check_Password->isChecked() && !Edit_Password->text().isEmpty()) {
-            QString error;
-            if(!createCryptedKeyFile(filename,&error,Combo_KeyFile->currentText(),Edit_Password->text())){
-                showErrMsg(error,this);
-                return;
-            }
-            else {
-                Combo_KeyFile->setEditText(filename);
-                return;
-            }
-        }
-    }
 }
 
 QString PasswordDialog::password(){

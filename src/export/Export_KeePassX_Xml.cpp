@@ -29,15 +29,22 @@ bool Export_KeePassX_Xml::exportDatabase(QWidget* GuiParent,IDatabase* database,
     if(fields != NONE)
         root.setAttribute("crypted", true);
 	doc.appendChild(root);
-	QList<IGroupHandle*> Groups=db->sortedGroups();
-	for(int i=0;i<Groups.size();i++){
-		if(Groups[i]->parent()==NULL){
-            addGroup(Groups[i],root,doc,key,fields);
-		}
-	}
-	file->write(doc.toByteArray());
-	file->close();
-	delete file;
+    try {
+        QList<IGroupHandle*> Groups=db->sortedGroups();
+        for(int i=0;i<Groups.size();i++){
+            if(Groups[i]->parent()==NULL){
+                addGroup(Groups[i],root,doc,key,fields);
+            }
+        }
+    } catch(EncryptException &) {
+        file->close();
+        delete file;
+        showErrMsg("Encryption error");
+        return false;
+    }
+    file->write(doc.toByteArray());
+    file->close();
+    delete file;
 	return true;
 }
 
@@ -114,7 +121,9 @@ void Export_KeePassX_Xml::addEntry(IEntryHandle* entry,QDomElement& parent,QDomD
 void Export_KeePassX_Xml::cryptElement(QDomDocument &document, QDomElement &element,const QString &str, const QByteArray &key, bool crypt) {
     if(crypt) {
         QByteArray out;
-        encrypt_data(str.toUtf8(), out, key);
+        if(!encrypt_data(str.toUtf8(), out, key)) {
+            throw EncryptException();
+        }
         element.appendChild(document.createTextNode(out.toBase64()));
         element.setAttribute("crypted", true);
     } else{
