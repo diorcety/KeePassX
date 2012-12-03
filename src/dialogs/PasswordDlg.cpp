@@ -97,6 +97,8 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 
 	if(Mode!=Mode_Set && Mode!=Mode_Change){
 		Button_GenKeyFile->hide();
+        Button_EncryptFile->hide();
+        Button_DecryptFile->hide();
 	}
 	/*if(flags & Flag_Auto){
 		/ *
